@@ -1,0 +1,146 @@
+// Estilos base de elementos, sobre el reboot de Bootstrap.
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + var(--space-s));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  text-wrap: balance;
+  margin-block: 0 var(--space-s);
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+h2 {
+  font-size: var(--step-4);
+}
+h3 {
+  font-size: var(--step-2);
+  line-height: var(--leading-snug);
+}
+h4 {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+}
+
+p {
+  margin-block: 0 var(--space-s);
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    color: var(--color-accent-strong);
+    text-decoration-thickness: 2px;
+  }
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  opacity: 1;
+  margin-block: var(--space-l);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+// Etiqueta pequeña en mayúsculas para encabezar secciones.
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.text-muted-token {
+  color: var(--color-text-muted);
+}
+
+// Enlace "saltar al contenido": invisible hasta recibir foco.
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--space-s);
+  inset-block-start: -100%;
+  z-index: 100;
+  padding: var(--space-2xs) var(--space-s);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: var(--radius-md);
+
+  &:focus {
+    inset-block-start: var(--space-s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

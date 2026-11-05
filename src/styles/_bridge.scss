@@ -1,0 +1,22 @@
+// Puente: las variables CSS que usa el Bootstrap parcial apuntan a nuestros tokens.
+// Bootstrap no emite su propio :root (no importamos _root.scss).
+:root {
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+  --bs-body-font-family: var(--font-body);
+  --bs-body-font-size: var(--step-0);
+  --bs-body-font-weight: var(--weight-regular);
+  --bs-body-line-height: var(--leading-body);
+  --bs-body-text-align: start;
+  --bs-heading-color: var(--color-text);
+  --bs-secondary-color: var(--color-text-muted);
+  --bs-border-width: 1px;
+  --bs-font-monospace: var(--font-mono);
+  --bs-code-color: var(--color-accent-strong);
+  --bs-highlight-bg: var(--color-surface-2);
+  --bs-highlight-color: var(--color-text);
+  // Los enlaces se estilan en _base.scss; estos valores solo evitan variables indefinidas.
+  --bs-link-color-rgb: currentColor;
+  --bs-link-hover-color-rgb: currentColor;
+  --bs-link-opacity: 1;
+}

@@ -1,0 +1,8 @@
+// Estilos globales. Orden: fuentes → tokens → Bootstrap parcial → puente → base.
+@use 'fonts';
+@use 'tokens/color';
+@use 'tokens/typography';
+@use 'tokens/space';
+@use 'bootstrap';
+@use 'bridge';
+@use 'base';

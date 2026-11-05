@@ -1,0 +1,50 @@
+// Tokens de color semánticos. Los componentes usan solo estos (--color-*), nunca valores sueltos.
+// Paleta "Partitura": papel cálido y grafito, con acento petróleo.
+// Ambos temas definen el mismo conjunto de tokens.
+
+$light: (
+  bg: #f5f3ee,
+  surface: #fbfaf7,
+  surface-2: #ebe8e0,
+  text: #17181c,
+  text-muted: #55575e,
+  border: #d6d2c7,
+  accent: #0b6474,
+  accent-strong: #084b57,
+  on-accent: #ffffff,
+);
+
+$dark: (
+  bg: #111316,
+  surface: #181b1f,
+  surface-2: #22262b,
+  text: #ecebe6,
+  text-muted: #a3a6ad,
+  border: #2f343a,
+  accent: #6cc6d3,
+  accent-strong: #9adbe4,
+  on-accent: #0a1a1d,
+);
+
+@mixin theme($colors, $scheme) {
+  color-scheme: $scheme;
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+  --color-focus: var(--color-accent);
+}
+
+// Sin elección: sigue al sistema. Con data-theme en <html>: el tema elegido.
+:root {
+  @include theme($light, light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include theme($dark, dark);
+  }
+}
+
+:root[data-theme='dark'] {
+  @include theme($dark, dark);
+}

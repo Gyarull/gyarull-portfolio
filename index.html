@@ -5,8 +5,18 @@
     <title>Guillermo Yarull</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/src/styles.css" />
+    <!-- Aplica el tema elegido antes del primer pintado, para evitar el destello. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/styles/main.scss" />
   </head>
   <body>
     <app-root></app-root>

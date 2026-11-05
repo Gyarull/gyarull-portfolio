@@ -1,0 +1,42 @@
+@use 'fluid' as *;
+
+// Espaciado fluido, radios, sombras, movimiento y layout.
+:root {
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: #{fluid(0.75, 0.875)};
+  --space-s: #{fluid(1, 1.125)};
+  --space-m: #{fluid(1.5, 1.75)};
+  --space-l: #{fluid(2, 2.5)};
+  --space-xl: #{fluid(3, 4)};
+  --space-2xl: #{fluid(4, 6)};
+  --space-3xl: #{fluid(6, 9)};
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 1px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.18);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 500ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --content-max: 72rem;
+  --measure: 65ch;
+  --gutter: var(--space-m);
+  --header-height: 4rem;
+}
+
+// Con movimiento reducido, todo lo que usa los tokens de duración pasa a ser instantáneo.
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

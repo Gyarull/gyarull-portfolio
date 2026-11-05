@@ -1,0 +1,16 @@
+@use 'sass:math';
+
+// Valor fluido entre dos tamaños (en rem) para viewports de 360px a 1280px.
+$min-vw: 22.5; // rem
+$max-vw: 80; // rem
+
+@function fluid($min, $max) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $intercept: $min - $slope * $min-vw;
+  @return clamp(
+    #{$min}rem,
+    #{math.div(math.round($intercept * 1000), 1000)}rem +
+      #{math.div(math.round($slope * 100000), 1000)}vw,
+    #{$max}rem
+  );
+}

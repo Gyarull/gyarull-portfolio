@@ -11,6 +11,16 @@ export default defineConfig(() => ({
   resolve: {
     mainFields: ['module'],
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Bootstrap 5.3 todavía usa @import y funciones globales de Sass; silenciamos esas
+        // deprecaciones (son de Bootstrap, no nuestras) para que el build quede sin warnings.
+        quietDeps: true,
+        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
+      },
+    },
+  },
   plugins: [
     analog({
       // Sitio 100 % estático: todo se prerenderiza a HTML en dist/analog/public.
