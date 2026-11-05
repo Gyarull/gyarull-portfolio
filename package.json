@@ -1,0 +1,60 @@
+{
+  "name": "gyarull-portfolio",
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "dev": "vite",
+    "start": "npm run dev",
+    "build": "npm run typecheck && vite build",
+    "test": "vitest run",
+    "preview": "npx --yes serve@14 dist/analog/public",
+    "lint": "eslint .",
+    "typecheck": "ngc -p tsconfig.app.json --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "private": true,
+  "dependencies": {
+    "@analogjs/content": "^2.9.6",
+    "@analogjs/router": "^2.9.6",
+    "@angular/common": "^22.0.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "@angular/platform-server": "^22.0.0",
+    "@angular/router": "^22.0.0",
+    "front-matter": "^4.0.2",
+    "marked": "^15.0.7",
+    "marked-gfm-heading-id": "^4.1.1",
+    "marked-highlight": "^2.2.1",
+    "marked-mangle": "^1.1.10",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@analogjs/platform": "^2.9.6",
+    "@analogjs/vite-plugin-angular": "^2.9.6",
+    "@analogjs/vitest-angular": "^2.9.6",
+    "@angular/build": "^22.0.0",
+    "@angular/cli": "^22.0.0",
+    "@angular/compiler-cli": "^22.0.0",
+    "angular-eslint": "^22.6.0",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "jsdom": "^22.0.0",
+    "prettier": "^3.9.10",
+    "typescript": "~6.0.0",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.0.0",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^5.0.0"
+  },
+  "overrides": {
+    "vite": "$vite",
+    "vitest": "$vitest"
+  }
+}
