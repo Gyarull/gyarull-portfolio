@@ -4,6 +4,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "gyarull",
   "compatibility_date": "2026-11-06",
+  // Publicar en <nombre>.<cuenta>.workers.dev (el sitio no usa dominio propio por ahora).
+  "workers_dev": true,
   "assets": {
     "directory": "./dist/analog/public",
     // Rutas inexistentes → /404.html con estado 404.
