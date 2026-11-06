@@ -2,6 +2,7 @@
  * Mide con Lighthouse el build estático (dist/analog/public), en mobile y desktop.
  *
  * Uso: npm run build && npm run lighthouse
+ *      npm run lighthouse -- https://sitio.publicado  (mide la URL dada, sin servidor local)
  * Usa Chrome o, si no está, Edge (variable CHROME_PATH para elegir otro). Guarda un resumen en
  * docs/lighthouse/summary.md y los reportes HTML en docs/lighthouse/reports/ (no se commitean).
  * Sale con código 1 si alguna categoría queda debajo de 90.
@@ -15,6 +16,8 @@ import lighthouse, { desktopConfig } from 'lighthouse';
 
 const root = join(fileURLToPath(import.meta.url), '..', '..');
 const PORT = 4173;
+const REMOTE = process.argv[2]?.replace(/\/+$/, '');
+const BASE = REMOTE ?? `http://localhost:${PORT}`;
 const PAGES = ['/', '/en', '/casos/ambitrack', '/en/case-studies/portfolio'];
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo'] as const;
 const MIN = 90;
@@ -30,18 +33,20 @@ if (!browserCandidates.length) {
   process.exit(1);
 }
 
-const server = spawn(
-  process.execPath,
-  [
-    join(root, 'node_modules', 'serve', 'build', 'main.js'),
-    '-l',
-    String(PORT),
-    '-n',
-    'dist/analog/public',
-  ],
-  { cwd: root, stdio: 'ignore' },
-);
-await new Promise((r) => setTimeout(r, 1500));
+const server = REMOTE
+  ? null
+  : spawn(
+      process.execPath,
+      [
+        join(root, 'node_modules', 'serve', 'build', 'main.js'),
+        '-l',
+        String(PORT),
+        '-n',
+        'dist/analog/public',
+      ],
+      { cwd: root, stdio: 'ignore' },
+    );
+if (server) await new Promise((r) => setTimeout(r, 1500));
 
 const chrome = await chromeLauncher.launch({
   chromePath: browserCandidates[0],
@@ -58,7 +63,7 @@ try {
   for (const device of ['mobile', 'desktop'] as const) {
     for (const page of PAGES) {
       const result = await lighthouse(
-        `http://localhost:${PORT}${page}`,
+        `${BASE}${page}`,
         { port: chrome.port, output: 'html', onlyCategories: [...CATEGORIES], logLevel: 'error' },
         device === 'desktop' ? desktopConfig : undefined,
       );
@@ -81,7 +86,7 @@ try {
   }
 } finally {
   await chrome.kill();
-  server.kill();
+  server?.kill();
 }
 
 const summary = `# Lighthouse
