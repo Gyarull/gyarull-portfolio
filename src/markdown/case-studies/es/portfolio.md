@@ -53,7 +53,9 @@ Cada fase cerraba igual: build, lint y tests sin warnings, revisión en el naveg
 
 ## Problemas difíciles
 
-**Rutas fantasma.** Analog convierte cada `.md` de la carpeta de contenido también en una ruta. Con la estructura inicial (`contenido/en/case-studies/…`), esa ruta automática pisaba la URL real del caso de estudio en inglés y mostraba otra página. Reordenar las carpetas por colección y después idioma hace que esas rutas nunca coincidan con las del sitio.
+**Rutas fantasma.** Analog convierte cada `.md` de su carpeta de contenido (`src/content`) también en una ruta. Con la estructura inicial, esa ruta automática pisaba la URL real del caso de estudio en inglés y mostraba otra página. Primero lo resolví reordenando carpetas; al final, el Markdown salió de esa carpeta y el sitio lo lee por su cuenta, así que esas rutas ya no existen.
+
+**Un bundle inicial que no hacía falta.** Para leer el frontmatter en el navegador, el runtime de contenido de Analog traía un parser de YAML (con esprima) y uno de Markdown: más de 230 KB en el chunk principal, para datos que ya estaban resueltos en el build. Reemplazarlo por `import.meta.glob` sobre las mismas transformaciones de build bajó el JavaScript inicial de 177 KB a 107 KB comprimidos, y el chunk principal de 87 KB a 17 KB.
 
 **Animar sin esconder contenido.** Las animaciones de entrada son un riesgo de rendimiento y de accesibilidad: si el título arranca invisible, se retrasa el primer contenido visible (LCP), y si falla el JavaScript, el texto no aparece nunca. La directiva de revelado solo actúa sobre lo que está fuera de pantalla y aplica el estado oculto desde JavaScript, así que el HTML prerenderizado no tiene nada escondido.
 
@@ -64,11 +66,12 @@ Cada fase cerraba igual: build, lint y tests sin warnings, revisión en el naveg
 ## Resultado y tiempos
 
 - **Tiempo:** de la primera pregunta al sitio completo, con contenido, animaciones y casos de estudio, unos dos días (5 y 6 de noviembre de 2026). [TODO: completar con el deploy]
-- **Peso:** CSS global de unos 12 KB comprimidos; Motion de 7 KB, que se carga después.
-- **Lighthouse:** [TODO: resultados en mobile y desktop, en la fase de rendimiento]
+- **Lighthouse:** 100 en Performance, Accessibility, Best Practices y SEO, en mobile y desktop, en la home y en los casos de estudio de los dos idiomas. LCP de 0,8 s en mobile y 0,2 s en desktop, CLS de 0.
+- **Peso:** JavaScript inicial de 107 KB comprimidos (casi todo Angular y su router); CSS global de 5 KB; Motion de 7 KB, que se carga después y solo si corresponde animar.
+- **Verificado en el navegador:** con `prefers-reduced-motion`, Motion no se descarga, el ecualizador y el pentagrama quedan quietos y todo el contenido es visible.
 
 ## Qué haría distinto
 
 - **Revisar el brief contra el stack antes de escribirlo.** Mezclar conceptos de Astro en un proyecto Angular costó una ronda de aclaraciones.
 - **Mover archivos con git, nunca a mano.** En una reorganización se perdieron archivos que todavía no estaban versionados y hubo que recrearlos.
-- **Mirar el peso del JavaScript desde la primera fase.** El renderizador de Markdown terminó en el bundle inicial y quedó para optimizar al final.
+- **Mirar el peso del JavaScript desde la primera fase.** El runtime de contenido estuvo en el bundle inicial desde la fase 3 y recién se detectó en la de rendimiento. Lighthouse daba 100 igual, pero era peso que no hacía falta.

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import type { Lang } from '../../../content/schema';
+import type { Lang } from '../content/schema';
 import { PROFILE, SITE } from '../content/site-data';
 import { LangService } from '../i18n/lang.service';
 

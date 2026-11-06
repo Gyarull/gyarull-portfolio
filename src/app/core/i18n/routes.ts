@@ -1,4 +1,4 @@
-import type { Lang } from '../../../content/schema';
+import type { Lang } from '../content/schema';
 
 /**
  * Rutas del sitio por idioma. Español va en la raíz y el inglés bajo /en.

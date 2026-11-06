@@ -6,30 +6,40 @@ Convenciones del framework: `node_modules/@analogjs/platform/AGENTS.md`.
 ## Comandos
 
 - `npm run dev`: servidor de desarrollo (http://localhost:5173)
-- `npm run build`: chequeo de tipos (`ngc`) + build + prerender a `dist/analog/public`
+- `npm run build`: validación de contenido + chequeo de tipos (`ngc`) + build + prerender a
+  `dist/analog/public` + postbuild (404, sitemap, robots, precarga de fuentes)
 - `npm run lint`, `npm run format`, `npm test`
+- `npm run lighthouse`: Lighthouse mobile y desktop sobre el build (resumen en
+  `docs/lighthouse/summary.md`); falla si alguna categoría baja de 90
+- `npm run check:motion`: verifica en Chrome/Edge headless el comportamiento con y sin
+  `prefers-reduced-motion`
+- `npm run og`: regenera las imágenes de Open Graph (se commitean)
 - `npm run preview`: sirve el build estático
 
 Una fase está terminada cuando build, lint y tests pasan sin errores ni warnings y se repasó
-[docs/CRITERIA.md](docs/CRITERIA.md).
+[docs/CRITERIA.md](docs/CRITERIA.md). Si el cambio toca rendimiento o animaciones, también
+`npm run lighthouse` y `npm run check:motion`.
 
 ## Reglas
 
 - **Contenido en Markdown o datos, nunca hardcodeado.** Textos, proyectos, stack, trayectoria y
-  contacto viven en `src/content/` (Markdown con frontmatter) y `src/data/` (JSON). Los textos de
+  contacto viven en `src/markdown/` (Markdown con frontmatter) y `src/data/` (JSON). Los textos de
   la interfaz van en los archivos de idioma. Agregar un proyecto = agregar un `.md`, sin tocar
   componentes.
 - Todo texto visible existe en ES y EN.
 - Estructura del contenido:
-  - `src/content/{projects|case-studies}/{es|en}/<slug>.md`: el mismo slug en ambos idiomas.
-    Frontmatter según `src/content/schema.ts`.
-  - `src/data/*.json`: perfil, contacto, stack y trayectoria. Los textos van como `{ "es", "en" }`.
+  - `src/markdown/{projects|case-studies}/{es|en}/<slug>.md`: el mismo slug en ambos idiomas.
+    Frontmatter según `src/app/core/content/schema.ts`.
+  - `src/data/*.json`: perfil, contacto, stack, trayectoria y URL del sitio. Los textos van como
+    `{ "es", "en" }`.
   - `src/i18n/{es,en}.json`: textos de interfaz. Las claves son las mismas en ambos idiomas.
   - `npm run check:content` valida todo esto y corre al inicio del build.
+- El contenido se lee con `import.meta.glob` en `content.service.ts`, usando las transformaciones
+  de build de Analog (`?analog-content-list`, `?analog-content-file`). No usar el runtime de
+  `@analogjs/content` (`injectContentFiles`, `MarkdownComponent`): suma unos 230 KB al bundle
+  inicial. No mover el Markdown a `src/content/`: Analog crea rutas automáticas para esa carpeta.
 - Rutas: ES en `/` y `/casos/<slug>`, EN en `/en` y `/en/case-studies/<slug>`
-  (`src/app/core/i18n/routes.ts`). Analog también crea rutas para cada `.md` de `src/content`;
-  por eso la carpeta empieza por la colección y no por el idioma, para que esas rutas automáticas
-  nunca coincidan con las del sitio. No se enlazan ni se prerenderizan.
+  (`src/app/core/i18n/routes.ts`).
 - **Privacidad:** no publicar el CV ni el teléfono. Los únicos medios de contacto son LinkedIn
   y el correo de `src/data/contact.json`.
 - El sitio no depende de Ambitrack: un proyecto con `demo` en su frontmatter muestra el botón de
@@ -37,10 +47,11 @@ Una fase está terminada cuando build, lint y tests pasan sin errores ni warning
 - Sin backend: todo se prerenderiza. Las rutas de contenido salen solas de `content-routes.ts`;
   una página nueva que no sea de contenido se agrega ahí.
 - Colores, tipografía, espaciado y radios salen de los tokens; no hay valores sueltos en
-  componentes. Bootstrap se usa solo en parte (reboot, grid, algunas utilidades), con variables
-  sobrescritas por tokens.
-- Componentes standalone con `OnPush`, signals y control flow nativo. Lo interactivo que no es
-  crítico carga con `@defer`.
+  componentes. De Bootstrap se usa solo reboot, contenedores, `visually-hidden` y algunas
+  utilidades sin variantes responsive (`src/styles/_bootstrap.scss`), con variables conectadas a
+  los tokens. El layout usa CSS grid propio.
+- Componentes standalone con `OnPush`, signals y control flow nativo. El código que toca el DOM
+  en hooks (`afterNextRender`) se protege con `isPlatformBrowser`: también corre en el prerender.
 - Toda animación tiene alternativa con `prefers-reduced-motion`, y el contenido es legible sin ella.
   Motion se usa solo vía `loadMotion()` (`src/app/core/motion/`): se carga con `import()` en el
   navegador y nunca en el prerender. Si necesitás otra API, reexportala en `motion-lite.ts`

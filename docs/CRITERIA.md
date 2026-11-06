@@ -10,17 +10,17 @@ Repasar al cerrar cada fase. Marcar solo lo verificado; lo que todavía no aplic
 
 ## Rendimiento y buenas prácticas (Lighthouse, mobile y desktop)
 
-- [ ] Performance ≥ 90
-- [ ] Accessibility ≥ 90
-- [ ] Best Practices ≥ 90
-- [ ] SEO ≥ 90
+- [x] Performance ≥ 90
+- [x] Accessibility ≥ 90
+- [x] Best Practices ≥ 90
+- [x] SEO ≥ 90
 
 ## Accesibilidad
 
 - [x] Todo es navegable con teclado y el foco siempre se ve
 - [x] Contraste AA en tema claro y oscuro
 - [x] El contenido no depende de las animaciones
-- [ ] Respeta `prefers-reduced-motion` (animaciones apagadas o simplificadas)
+- [x] Respeta `prefers-reduced-motion` (animaciones apagadas o simplificadas)
 
 ## Diseño
 

@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
 
-import type { Lang, Localized } from '../../../content/schema';
+import type { Lang, Localized } from '../content/schema';
 import { DICTIONARIES, format } from './dictionaries';
 import { langFromUrl, translatePath } from './routes';
 

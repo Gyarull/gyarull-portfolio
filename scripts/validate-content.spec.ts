@@ -9,7 +9,7 @@ const ROOT = join(__dirname, '..');
 /** Copia el contenido real del sitio a una carpeta temporal para modificarlo en cada test. */
 function fixture(): string {
   const dir = mkdtempSync(join(tmpdir(), 'portfolio-content-'));
-  for (const sub of ['content', 'data', 'i18n']) {
+  for (const sub of ['markdown', 'data', 'i18n']) {
     cpSync(join(ROOT, 'src', sub), join(dir, 'src', sub), { recursive: true });
   }
   return dir;
@@ -37,7 +37,7 @@ describe('validateContent', () => {
   it('acepta un proyecto nuevo agregado en ambos idiomas', () => {
     for (const lang of ['es', 'en']) {
       writeFileSync(
-        join(dir, 'src/content/projects', lang, 'nuevo.md'),
+        join(dir, 'src/markdown/projects', lang, 'nuevo.md'),
         `---\ntitle: Nuevo\nsummary: Un proyecto nuevo.\nstack: [C#]\ndate: '2026-12-01'\norder: 2\n---\n`,
       );
     }
@@ -45,7 +45,7 @@ describe('validateContent', () => {
   });
 
   it('rechaza frontmatter que no cumple el esquema', () => {
-    edit(join(dir, 'src/content/projects/es/ambitrack.md'), (t) =>
+    edit(join(dir, 'src/markdown/projects/es/ambitrack.md'), (t) =>
       t.replace('order: 1', 'order: primero').replace(/date: '.*'/, 'date: 2026-11-05'),
     );
     const errors = validateContent(dir);
@@ -54,21 +54,21 @@ describe('validateContent', () => {
   });
 
   it('rechaza campos desconocidos en el frontmatter', () => {
-    edit(join(dir, 'src/content/projects/en/ambitrack.md'), (t) =>
+    edit(join(dir, 'src/markdown/projects/en/ambitrack.md'), (t) =>
       t.replace('order: 1', 'order: 1\ntitel: typo'),
     );
     expect(validateContent(dir).some((e) => e.includes('titel'))).toBe(true);
   });
 
   it('exige la traducción de cada archivo', () => {
-    unlinkSync(join(dir, 'src/content/case-studies/en/portfolio.md'));
+    unlinkSync(join(dir, 'src/markdown/case-studies/en/portfolio.md'));
     expect(validateContent(dir)).toContain(
-      'src/content/case-studies/en/portfolio.md: falta la traducción',
+      'src/markdown/case-studies/en/portfolio.md: falta la traducción',
     );
   });
 
   it('detecta referencias a casos de estudio inexistentes', () => {
-    edit(join(dir, 'src/content/projects/es/ambitrack.md'), (t) =>
+    edit(join(dir, 'src/markdown/projects/es/ambitrack.md'), (t) =>
       t.replace('caseStudy: ambitrack', 'caseStudy: no-existe'),
     );
     expect(validateContent(dir).some((e) => e.includes('"no-existe"'))).toBe(true);

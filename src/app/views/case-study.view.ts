@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  resource,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MarkdownComponent } from '@analogjs/content';
-import { contentFileResource } from '@analogjs/content/resources';
 import { map } from 'rxjs';
 
-import type { CaseStudy } from '../../content/schema';
 import { ContentService } from '../core/content/content.service';
 import { PROFILE } from '../core/content/site-data';
 import { LangService } from '../core/i18n/lang.service';
@@ -19,7 +24,7 @@ import { TagList } from '../ui/tag-list';
 /** Caso de estudio: ES en "/casos/:slug" y EN en "/en/case-studies/:slug". */
 @Component({
   selector: 'app-case-study-view',
-  imports: [MarkdownComponent, RouterLink, Icon, LaunchButton, TagList, RevealDirective],
+  imports: [RouterLink, Icon, LaunchButton, TagList, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="container">
@@ -52,8 +57,8 @@ import { TagList } from '../ui/tag-list';
           }
         }
 
-        @if (file.value(); as f) {
-          <analog-markdown class="prose" [content]="f.content" appReveal />
+        @if (body(); as html) {
+          <div class="prose" [innerHTML]="html" appReveal></div>
         }
       </article>
     </main>
@@ -113,9 +118,20 @@ export class CaseStudyView {
     { initialValue: '' },
   );
 
-  protected readonly file = contentFileResource<CaseStudy>(
-    computed(() => ({ customFilename: this.content.caseStudyFile(this.i18n.lang(), this.slug()) })),
-  );
+  private readonly sanitizer = inject(DomSanitizer);
+
+  /** Cuerpo en HTML, generado en el build desde nuestro propio Markdown (contenido confiable). */
+  private readonly file = resource({
+    params: () => ({ lang: this.i18n.lang(), slug: this.slug() }),
+    loader: ({ params }) =>
+      params.slug ? this.content.caseStudyHtml(params.lang, params.slug) : Promise.resolve(null),
+  });
+
+  protected readonly body = computed(() => {
+    const html = this.file.hasValue() ? this.file.value() : null;
+    // Se confía en el HTML para conservar los estilos en línea con que Shiki colorea el código.
+    return html ? this.sanitizer.bypassSecurityTrustHtml(html) : null;
+  });
 
   protected readonly meta = computed(
     () => this.content.caseStudies().find((c) => c.slug === this.slug()) ?? null,

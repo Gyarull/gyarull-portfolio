@@ -1,7 +1,7 @@
 /**
  * Valida el contenido y los datos del sitio antes del build.
  *
- * - Frontmatter de cada .md contra su esquema (src/content/schema.ts).
+ * - Frontmatter de cada .md contra su esquema (src/app/core/content/schema.ts).
  * - Cada proyecto y caso de estudio existe en todos los idiomas, con el mismo nombre de archivo.
  * - Las referencias entre proyectos y casos de estudio apuntan a archivos existentes.
  * - Los JSON de src/data cumplen su esquema.
@@ -25,7 +25,7 @@ import {
   projectSchema,
   stackSchema,
   timelineSchema,
-} from '../src/content/schema.ts';
+} from '../src/app/core/content/schema.ts';
 
 const COLLECTIONS = {
   projects: projectSchema,
@@ -47,7 +47,7 @@ const PHONE = /\+\d[\d\s-]{7,}\d/;
 export function validateContent(root: string): string[] {
   const errors: string[] = [];
   const rel = (path: string) => relative(root, path).replaceAll('\\', '/');
-  const contentDir = join(root, 'src', 'content');
+  const contentDir = join(root, 'src', 'markdown');
   const slugs = {} as Record<Collection, Record<string, Set<string>>>;
   const attrs = {} as Record<Collection, Map<string, Record<string, unknown>>>;
 
@@ -99,7 +99,7 @@ export function validateContent(root: string): string[] {
     for (const slug of all) {
       for (const lang of LANGS) {
         if (!slugs[collection][lang].has(slug)) {
-          errors.push(`src/content/${collection}/${lang}/${slug}.md: falta la traducción`);
+          errors.push(`src/markdown/${collection}/${lang}/${slug}.md: falta la traducción`);
         }
       }
     }
@@ -110,14 +110,14 @@ export function validateContent(root: string): string[] {
     const lang = key.split('/')[1];
     const ref = data['caseStudy'];
     if (typeof ref === 'string' && !slugs['case-studies'][lang]?.has(ref)) {
-      errors.push(`src/content/${key}.md: caseStudy "${ref}" no existe en case-studies/${lang}`);
+      errors.push(`src/markdown/${key}.md: caseStudy "${ref}" no existe en case-studies/${lang}`);
     }
   }
   for (const [key, data] of attrs['case-studies']) {
     const lang = key.split('/')[1];
     const ref = data['project'];
     if (typeof ref === 'string' && !slugs.projects[lang]?.has(ref)) {
-      errors.push(`src/content/${key}.md: project "${ref}" no existe en projects/${lang}`);
+      errors.push(`src/markdown/${key}.md: project "${ref}" no existe en projects/${lang}`);
     }
   }
 

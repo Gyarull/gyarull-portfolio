@@ -11,7 +11,7 @@ const LANG_PREFIX = { es: '/casos', en: '/en/case-studies' } as const;
 export function contentRoutes(root: string): string[] {
   const routes = ['/', '/en', '/404'];
   for (const [lang, prefix] of Object.entries(LANG_PREFIX)) {
-    const dir = join(root, 'src', 'content', 'case-studies', lang);
+    const dir = join(root, 'src', 'markdown', 'case-studies', lang);
     if (!existsSync(dir)) continue;
     for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
       const { attributes } = frontMatter<{ draft?: boolean }>(

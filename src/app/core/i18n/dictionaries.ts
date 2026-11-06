@@ -1,4 +1,4 @@
-import type { Lang } from '../../../content/schema';
+import type { Lang } from '../content/schema';
 import enJson from '../../../i18n/en.json';
 import esJson from '../../../i18n/es.json';
 

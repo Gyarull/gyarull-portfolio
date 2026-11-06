@@ -1,4 +1,4 @@
-import type { Contact, Profile, Site, Stack, Timeline } from '../../../content/schema';
+import type { Contact, Profile, Site, Stack, Timeline } from './schema';
 import contactJson from '../../../data/contact.json';
 import profileJson from '../../../data/profile.json';
 import siteJson from '../../../data/site.json';

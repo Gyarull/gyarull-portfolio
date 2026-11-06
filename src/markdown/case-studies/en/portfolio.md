@@ -53,7 +53,9 @@ Every phase closed the same way: build, lint and tests with no warnings, a check
 
 ## Hard problems
 
-**Ghost routes.** Analog also turns every `.md` in the content folder into a route. With the initial structure (`content/en/case-studies/…`), that automatic route overrode the real URL of the English case study and showed a different page. Ordering the folders by collection and then language means those routes never match the site's own.
+**Ghost routes.** Analog also turns every `.md` in its content folder (`src/content`) into a route. With the initial structure, that automatic route overrode the real URL of the English case study and showed a different page. I first fixed it by reordering folders; in the end the Markdown moved out of that folder and the site reads it on its own, so those routes no longer exist.
+
+**An initial bundle that wasn't needed.** To read frontmatter in the browser, Analog's content runtime shipped a YAML parser (with esprima) and a Markdown parser: more than 230 KB in the main chunk, for data already resolved at build time. Replacing it with `import.meta.glob` over the same build transforms cut initial JavaScript from 177 KB to 107 KB gzipped, and the main chunk from 87 KB to 17 KB.
 
 **Animating without hiding content.** Entrance animations are a performance and accessibility risk: if the heading starts invisible, the largest contentful paint (LCP) is delayed, and if JavaScript fails, the text never shows up. The reveal directive only acts on what's off screen and applies the hidden state from JavaScript, so the prerendered HTML hides nothing.
 
@@ -64,11 +66,12 @@ Every phase closed the same way: build, lint and tests with no warnings, a check
 ## Result and timeline
 
 - **Time:** from the first question to the complete site, with content, animations and case studies, about two days (November 5 and 6, 2026). [TODO: complete with the deploy]
-- **Weight:** global CSS of about 12 KB gzipped; Motion at 7 KB, loaded later.
-- **Lighthouse:** [TODO: mobile and desktop results, in the performance phase]
+- **Lighthouse:** 100 in Performance, Accessibility, Best Practices and SEO, on mobile and desktop, for the home page and the case studies in both languages. LCP of 0.8 s on mobile and 0.2 s on desktop, CLS of 0.
+- **Weight:** 107 KB of initial JavaScript gzipped (almost all Angular and its router); 5 KB of global CSS; Motion at 7 KB, loaded later and only when animating makes sense.
+- **Verified in the browser:** with `prefers-reduced-motion`, Motion isn't downloaded, the equalizer and the staff lines stay still and all content is visible.
 
 ## What I'd do differently
 
 - **Check the brief against the stack before writing it.** Mixing Astro concepts into an Angular project cost a round of clarifications.
 - **Move files with git, never by hand.** A reorganization lost files that weren't versioned yet, and they had to be recreated.
-- **Watch JavaScript weight from the first phase.** The Markdown renderer ended up in the initial bundle and was left to optimize at the end.
+- **Watch JavaScript weight from the first phase.** The content runtime sat in the initial bundle from phase 3 and was only caught in the performance phase. Lighthouse scored 100 anyway, but it was weight nobody needed.

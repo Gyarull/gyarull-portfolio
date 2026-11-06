@@ -54,8 +54,7 @@ export const SECTION_IDS = ['projects', 'stack', 'journey', 'contact'] as const;
             class="tool lang"
             [href]="i18n.alternateUrl()"
             [attr.hreflang]="i18n.other()"
-            [attr.lang]="i18n.other()"
-            [attr.aria-label]="i18n.t().lang.switchToLabel"
+            [attr.aria-label]="i18n.other().toUpperCase() + ' · ' + i18n.t().lang.switchToLabel"
           >
             {{ i18n.other().toUpperCase() }}
           </a>
