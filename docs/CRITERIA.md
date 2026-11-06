@@ -27,7 +27,7 @@ Repasar al cerrar cada fase. Marcar solo lo verificado; lo que todavía no aplic
 - [x] Responsive real, revisado a 375 px y 1440 px
 - [ ] El elemento firma tiene versión liviana en mobile
 - [x] Modo claro y oscuro: sigue al sistema, con botón en la barra superior y sin destello al cargar
-- [ ] Selector de idioma ES/EN, con todo el contenido en ambos idiomas
+- [x] Selector de idioma ES/EN, con todo el contenido en ambos idiomas
 
 ## Contenido
 
@@ -39,5 +39,5 @@ Repasar al cerrar cada fase. Marcar solo lo verificado; lo que todavía no aplic
 
 - [x] Título y descripción por página
 - [x] Open Graph por página
-- [ ] `sitemap.xml` generado
+- [x] `sitemap.xml` generado
 - [x] `hreflang` entre ES y EN
