@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "siteDescription": "Portfolio de Guillermo Yarull, desarrollador backend .NET en Paraná, Argentina. Proyectos, stack y casos de estudio."
+  },
+  "nav": {
+    "label": "Navegación principal",
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "stack": "Stack",
+    "journey": "Trayectoria",
+    "contact": "Contacto",
+    "skipToContent": "Saltar al contenido"
+  },
+  "theme": {
+    "toLight": "Cambiar a tema claro",
+    "toDark": "Cambiar a tema oscuro"
+  },
+  "lang": {
+    "label": "Idioma",
+    "switchTo": "English",
+    "switchToLabel": "Ver el sitio en inglés"
+  },
+  "hero": {
+    "eyebrow": "Hola, soy"
+  },
+  "projects": {
+    "featured": "Proyecto destacado",
+    "others": "Otros proyectos",
+    "launch": "Probar {title}",
+    "launchHint": "Se abre en una pestaña nueva",
+    "repo": "Código",
+    "video": "Video",
+    "caseStudy": "Leer el caso de estudio",
+    "stack": "Tecnologías"
+  },
+  "stack": {
+    "title": "Stack",
+    "production": "Uso en producción",
+    "recent": "Aprendí para proyectos recientes",
+    "learning": "Aprendiendo ahora",
+    "years": "{n} años",
+    "learnedIn": "Me llevó {time}"
+  },
+  "journey": {
+    "title": "Trayectoria"
+  },
+  "contact": {
+    "title": "Contacto",
+    "lead": "¿Tenés un proyecto o una propuesta? Escribime por correo o LinkedIn.",
+    "email": "Correo",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "caseStudy": {
+    "eyebrow": "Caso de estudio",
+    "back": "Volver al inicio",
+    "published": "Publicado el {date}"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "La página que buscás no existe o cambió de lugar.",
+    "back": "Volver al inicio"
+  },
+  "footer": {
+    "builtWith": "Hecho con Analog y Claude Code."
+  }
+}

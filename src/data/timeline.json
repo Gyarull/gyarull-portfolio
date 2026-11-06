@@ -1,0 +1,45 @@
+[
+  {
+    "period": "2022 –",
+    "role": {
+      "es": "Custom Software Engineering Analyst",
+      "en": "Custom Software Engineering Analyst"
+    },
+    "org": "Accenture Argentina",
+    "location": { "es": "Remoto", "en": "Remote" },
+    "summary": {
+      "es": "APIs REST con ASP.NET Core para sistemas de uso diario: lógica de negocio, modelado de datos, optimización de consultas SQL y soporte en producción.",
+      "en": "REST APIs with ASP.NET Core for systems in daily use: business logic, data modeling, SQL query optimization and production support."
+    }
+  },
+  {
+    "period": "2019 – 2021",
+    "role": { "es": "Fullstack Developer", "en": "Fullstack Developer" },
+    "org": "Electrónica Megatone (Musimundo)",
+    "location": { "es": "Santa Fe", "en": "Santa Fe" },
+    "summary": {
+      "es": "Aplicaciones internas con .NET y Angular, servicios WebAPI, REST y SOAP sobre SQL Server.",
+      "en": "Internal applications with .NET and Angular, WebAPI, REST and SOAP services on SQL Server."
+    }
+  },
+  {
+    "period": "2017 – 2020",
+    "role": { "es": "Técnico en Programación", "en": "Programming Technician (degree)" },
+    "org": "Universidad Tecnológica Nacional",
+    "location": { "es": "Paraná", "en": "Paraná" },
+    "summary": {
+      "es": "Tecnicatura completa, promedio 8,7.",
+      "en": "Two-year technical degree, 8.7 average."
+    }
+  },
+  {
+    "period": "2019",
+    "role": { "es": "Pasantía de desarrollo", "en": "Development internship" },
+    "org": "Integral Software",
+    "location": { "es": "Paraná", "en": "Paraná" },
+    "summary": {
+      "es": "Primeros servicios web y APIs para consumo externo.",
+      "en": "First web services and APIs for external consumers."
+    }
+  }
+]

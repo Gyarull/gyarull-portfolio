@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "siteDescription": "Portfolio of Guillermo Yarull, .NET backend developer based in Paraná, Argentina. Projects, stack and case studies."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "projects": "Projects",
+    "stack": "Stack",
+    "journey": "Journey",
+    "contact": "Contact",
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
+  "lang": {
+    "label": "Language",
+    "switchTo": "Español",
+    "switchToLabel": "View the site in Spanish"
+  },
+  "hero": {
+    "eyebrow": "Hi, I'm"
+  },
+  "projects": {
+    "featured": "Featured project",
+    "others": "Other projects",
+    "launch": "Try {title}",
+    "launchHint": "Opens in a new tab",
+    "repo": "Code",
+    "video": "Video",
+    "caseStudy": "Read the case study",
+    "stack": "Technologies"
+  },
+  "stack": {
+    "title": "Stack",
+    "production": "In production",
+    "recent": "Learned for recent projects",
+    "learning": "Learning now",
+    "years": "{n} years",
+    "learnedIn": "Took me {time}"
+  },
+  "journey": {
+    "title": "Journey"
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Have a project or an offer? Reach me by email or LinkedIn.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "caseStudy": {
+    "eyebrow": "Case study",
+    "back": "Back to home",
+    "published": "Published on {date}"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has moved.",
+    "back": "Back to home"
+  },
+  "footer": {
+    "builtWith": "Built with Analog and Claude Code."
+  }
+}

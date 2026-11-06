@@ -8,13 +8,14 @@
   "scripts": {
     "dev": "vite",
     "start": "npm run dev",
-    "build": "npm run typecheck && vite build",
+    "build": "npm run check:content && npm run typecheck && vite build",
     "test": "vitest run",
     "preview": "npx --yes serve@14 dist/analog/public",
     "lint": "eslint .",
-    "typecheck": "ngc -p tsconfig.app.json --noEmit",
+    "typecheck": "ngc -p tsconfig.app.json --noEmit && tsc -p tsconfig.scripts.json",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check:content": "node scripts/validate-content.ts"
   },
   "private": true,
   "dependencies": {
@@ -45,18 +46,22 @@
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
     "@fontsource-variable/newsreader": "^5.3.0",
+    "@types/node": "^24.19.2",
     "angular-eslint": "^22.6.0",
     "bootstrap": "^5.3.8",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "jsdom": "^22.0.0",
+    "marked-shiki": "^1.2.1",
     "prettier": "^3.9.10",
     "sass": "^1.107.1",
+    "shiki": "^1.29.2",
     "typescript": "~6.0.0",
     "typescript-eslint": "^8.72.1",
     "vite": "^8.0.0",
     "vite-tsconfig-paths": "^4.2.0",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "zod": "^4.6.7"
   },
   "overrides": {
     "vite": "$vite",

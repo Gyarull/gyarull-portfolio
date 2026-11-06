@@ -1,0 +1,45 @@
+{
+  "production": [
+    { "name": "C#" },
+    { "name": "ASP.NET Core" },
+    { "name": "Entity Framework Core" },
+    { "name": "SQL Server" },
+    { "name": "PostgreSQL" },
+    { "name": "Azure DevOps (CI/CD)" },
+    { "name": "Application Insights" },
+    { "name": "Git" }
+  ],
+  "recent": [
+    {
+      "name": "TypeScript",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Ambitrack y este sitio", "en": "Ambitrack and this site" }
+    },
+    {
+      "name": "React",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Ambitrack", "en": "Ambitrack" }
+    },
+    {
+      "name": "Web Audio API",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Ambitrack", "en": "Ambitrack" }
+    },
+    {
+      "name": "WebGL",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Ambitrack", "en": "Ambitrack" }
+    },
+    {
+      "name": "Analog (Angular)",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Este sitio", "en": "This site" }
+    },
+    {
+      "name": "Claude Code",
+      "time": { "es": "[TODO: tiempo]", "en": "[TODO: time]" },
+      "context": { "es": "Ambitrack y este sitio", "en": "Ambitrack and this site" }
+    }
+  ],
+  "learning": [{ "name": "Kotlin" }]
+}

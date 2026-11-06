@@ -1,0 +1,15 @@
+{
+  "name": "Guillermo Yarull",
+  "role": {
+    "es": "Backend Developer · .NET",
+    "en": "Backend Developer · .NET"
+  },
+  "tagline": {
+    "es": "Construyo APIs sólidas para sistemas en producción y, con herramientas de IA, llevo ideas a producto completo, incluso en tecnologías que recién empiezo a usar.",
+    "en": "I build solid APIs for production systems and, with AI tools, take ideas all the way to a finished product, even in technologies I'm just starting to use."
+  },
+  "location": {
+    "es": "Paraná, Argentina",
+    "en": "Paraná, Argentina"
+  }
+}
