@@ -18,6 +18,9 @@ import { Icon } from '../ui/icon';
     </a>
   `,
   styles: `
+    :host {
+      display: block;
+    }
     .lead {
       max-width: var(--measure);
       font-size: var(--step-1);

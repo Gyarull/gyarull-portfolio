@@ -42,4 +42,7 @@ Una fase está terminada cuando build, lint y tests pasan sin errores ni warning
 - Componentes standalone con `OnPush`, signals y control flow nativo. Lo interactivo que no es
   crítico carga con `@defer`.
 - Toda animación tiene alternativa con `prefers-reduced-motion`, y el contenido es legible sin ella.
+  Motion se usa solo vía `loadMotion()` (`src/app/core/motion/`): se carga con `import()` en el
+  navegador y nunca en el prerender. Si necesitás otra API, reexportala en `motion-lite.ts`
+  (importar `motion` entero suma unos 60 KB). Para revelar al hacer scroll, usá `appReveal`.
 - Commits en Conventional Commits, uno por fase.

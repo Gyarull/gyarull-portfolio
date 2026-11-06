@@ -13,12 +13,13 @@ import { caseStudyPath, homePath } from '../core/i18n/routes';
 import { SeoService } from '../core/seo/seo.service';
 import { Icon } from '../ui/icon';
 import { LaunchButton } from '../ui/launch-button';
+import { RevealDirective } from '../ui/reveal.directive';
 import { TagList } from '../ui/tag-list';
 
 /** Caso de estudio: ES en "/casos/:slug" y EN en "/en/case-studies/:slug". */
 @Component({
   selector: 'app-case-study-view',
-  imports: [MarkdownComponent, RouterLink, Icon, LaunchButton, TagList],
+  imports: [MarkdownComponent, RouterLink, Icon, LaunchButton, TagList, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="container">
@@ -52,7 +53,7 @@ import { TagList } from '../ui/tag-list';
         }
 
         @if (file.value(); as f) {
-          <analog-markdown class="prose" [content]="f.content" />
+          <analog-markdown class="prose" [content]="f.content" appReveal />
         }
       </article>
     </main>

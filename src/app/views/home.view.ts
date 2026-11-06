@@ -11,52 +11,61 @@ import { Hero } from '../sections/hero';
 import { JourneySection } from '../sections/journey-section';
 import { ProjectCard } from '../sections/project-card';
 import { StackSection } from '../sections/stack-section';
+import { RevealDirective } from '../ui/reveal.directive';
 
 /** Home: ES en "/" y EN en "/en". */
 @Component({
   selector: 'app-home-view',
-  imports: [Hero, FeaturedProject, ProjectCard, StackSection, JourneySection, ContactSection],
+  imports: [
+    Hero,
+    FeaturedProject,
+    ProjectCard,
+    StackSection,
+    JourneySection,
+    ContactSection,
+    RevealDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main>
       <app-hero />
 
       <section id="projects" class="section container" aria-labelledby="projects-title">
-        <header class="section-head">
+        <header class="section-head" appReveal>
           <h2 id="projects-title">{{ i18n.t().nav.projects }}</h2>
         </header>
         @if (content.featured(); as featured) {
-          <app-featured-project [project]="featured" />
+          <app-featured-project [project]="featured" appReveal [appRevealDelay]="0.1" />
         }
         @if (content.others().length) {
           <h3 class="others-title">{{ i18n.t().projects.others }}</h3>
           <ul class="grid">
             @for (p of content.others(); track p.slug) {
-              <li><app-project-card [project]="p" /></li>
+              <li appReveal [appRevealDelay]="$index * 0.08"><app-project-card [project]="p" /></li>
             }
           </ul>
         }
       </section>
 
       <section id="stack" class="section container" aria-labelledby="stack-title">
-        <header class="section-head">
+        <header class="section-head" appReveal>
           <h2 id="stack-title">{{ i18n.t().stack.title }}</h2>
         </header>
-        <app-stack-section />
+        <app-stack-section appReveal [appRevealDelay]="0.1" />
       </section>
 
       <section id="journey" class="section container" aria-labelledby="journey-title">
-        <header class="section-head">
+        <header class="section-head" appReveal>
           <h2 id="journey-title">{{ i18n.t().journey.title }}</h2>
         </header>
         <app-journey-section />
       </section>
 
       <section id="contact" class="section container" aria-labelledby="contact-title">
-        <header class="section-head">
+        <header class="section-head" appReveal>
           <h2 id="contact-title">{{ i18n.t().contact.title }}</h2>
         </header>
-        <app-contact-section />
+        <app-contact-section appReveal [appRevealDelay]="0.1" />
       </section>
     </main>
   `,

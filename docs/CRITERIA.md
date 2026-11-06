@@ -19,13 +19,13 @@ Repasar al cerrar cada fase. Marcar solo lo verificado; lo que todavía no aplic
 
 - [x] Todo es navegable con teclado y el foco siempre se ve
 - [x] Contraste AA en tema claro y oscuro
-- [ ] El contenido no depende de las animaciones
+- [x] El contenido no depende de las animaciones
 - [ ] Respeta `prefers-reduced-motion` (animaciones apagadas o simplificadas)
 
 ## Diseño
 
 - [x] Responsive real, revisado a 375 px y 1440 px
-- [ ] El elemento firma tiene versión liviana en mobile
+- [x] El elemento firma tiene versión liviana en mobile
 - [x] Modo claro y oscuro: sigue al sistema, con botón en la barra superior y sin destello al cargar
 - [x] Selector de idioma ES/EN, con todo el contenido en ambos idiomas
 

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  afterNextRender,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { PROFILE } from '../core/content/site-data';
@@ -13,7 +22,11 @@ export const SECTION_IDS = ['projects', 'stack', 'journey', 'contact'] as const;
   selector: 'app-site-header',
   imports: [RouterLink, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(document:keydown.escape)': 'menuOpen.set(false)' },
+  host: {
+    '(document:keydown.escape)': 'menuOpen.set(false)',
+    '[class.is-hidden]': 'hidden() && !menuOpen()',
+    '(focusin)': 'hidden.set(false)',
+  },
   template: `
     <header class="site-header">
       <div class="container bar">
@@ -72,10 +85,18 @@ export const SECTION_IDS = ['projects', 'stack', 'journey', 'contact'] as const;
     </header>
   `,
   styles: `
-    .site-header {
+    /* Fijo arriba; se esconde al bajar y vuelve al subir (o al recibir foco). */
+    :host {
+      display: block;
       position: sticky;
       top: 0;
       z-index: 50;
+      transition: transform var(--duration-slow) var(--ease-out);
+    }
+    :host(.is-hidden) {
+      transform: translateY(-100%);
+    }
+    .site-header {
       background: color-mix(in srgb, var(--color-bg) 88%, transparent);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
@@ -199,6 +220,34 @@ export class SiteHeader {
   protected readonly name = PROFILE.name;
   protected readonly sections = SECTION_IDS;
   protected readonly menuOpen = signal(false);
+  protected readonly hidden = signal(false);
+
+  constructor() {
+    const win = inject(DOCUMENT).defaultView;
+    const isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+    const destroyRef = inject(DestroyRef);
+
+    afterNextRender(() => {
+      if (!isBrowser || !win) return;
+      let lastY = win.scrollY;
+      let frame = 0;
+      const onScroll = () => {
+        if (frame) return;
+        frame = win.requestAnimationFrame(() => {
+          frame = 0;
+          const y = win.scrollY;
+          const delta = y - lastY;
+          // Umbral para ignorar micro-scrolls; cerca del tope siempre visible.
+          if (y < 120) this.hidden.set(false);
+          else if (delta > 8) this.hidden.set(true);
+          else if (delta < -8) this.hidden.set(false);
+          if (Math.abs(delta) > 8) lastY = y;
+        });
+      };
+      win.addEventListener('scroll', onScroll, { passive: true });
+      destroyRef.onDestroy(() => win.removeEventListener('scroll', onScroll));
+    });
+  }
 
   protected home() {
     return homePath(this.i18n.lang());

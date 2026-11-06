@@ -43,6 +43,9 @@ import { TagList } from '../ui/tag-list';
     </article>
   `,
   styles: `
+    :host {
+      display: block;
+    }
     .featured {
       padding: var(--space-l);
       border: 1px solid var(--color-border);

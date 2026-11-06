@@ -59,6 +59,9 @@ import { LangService } from '../core/i18n/lang.service';
     </div>
   `,
   styles: `
+    :host {
+      display: block;
+    }
     .groups {
       display: grid;
       gap: var(--space-l);

@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TIMELINE } from '../core/content/site-data';
 import { LangService } from '../core/i18n/lang.service';
+import { RevealDirective } from '../ui/reveal.directive';
 
 @Component({
   selector: 'app-journey-section',
+  imports: [RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ol class="timeline">
       @for (entry of timeline; track entry.period + entry.org) {
-        <li>
+        <li appReveal [appRevealDelay]="$index * 0.08">
           <p class="period">{{ entry.period }}</p>
           <div>
             <h3>{{ i18n.pick(entry.role) }}</h3>
