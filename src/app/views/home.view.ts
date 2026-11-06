@@ -1,87 +1,93 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 
 import { ContentService } from '../core/content/content.service';
-import { CONTACT, PROFILE, STACK, TIMELINE } from '../core/content/site-data';
+import { PROFILE } from '../core/content/site-data';
 import { LangService } from '../core/i18n/lang.service';
-import { caseStudyPath } from '../core/i18n/routes';
+import { homePath } from '../core/i18n/routes';
+import { SeoService } from '../core/seo/seo.service';
+import { ContactSection } from '../sections/contact-section';
+import { FeaturedProject } from '../sections/featured-project';
+import { Hero } from '../sections/hero';
+import { JourneySection } from '../sections/journey-section';
+import { ProjectCard } from '../sections/project-card';
+import { StackSection } from '../sections/stack-section';
 
-/**
- * Home (ES en "/" y EN en "/en").
- * FASE 3: listado mínimo para verificar el modelo de contenido; el diseño real llega en la fase 4.
- */
+/** Home: ES en "/" y EN en "/en". */
 @Component({
   selector: 'app-home-view',
-  imports: [RouterLink],
+  imports: [Hero, FeaturedProject, ProjectCard, StackSection, JourneySection, ContactSection],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <main class="container py-5">
-      <p class="eyebrow">{{ i18n.t().hero.eyebrow }}</p>
-      <h1>{{ profile.name }}</h1>
-      <p>{{ i18n.pick(profile.role) }} · {{ i18n.pick(profile.location) }}</p>
-      <p>{{ i18n.pick(profile.tagline) }}</p>
-      <p>
-        <a [href]="i18n.alternateUrl()" [attr.hreflang]="i18n.other()">{{
-          i18n.t().lang.switchTo
-        }}</a>
-      </p>
+    <main>
+      <app-hero />
 
-      <h2>{{ i18n.t().nav.projects }}</h2>
-      <ul data-testid="projects">
-        @for (p of content.projects(); track p.slug) {
-          <li>
-            <strong>{{ p.title }}</strong>
-            @if (p.featured) {
-              ({{ i18n.t().projects.featured }})
+      <section id="projects" class="section container" aria-labelledby="projects-title">
+        <header class="section-head">
+          <h2 id="projects-title">{{ i18n.t().nav.projects }}</h2>
+        </header>
+        @if (content.featured(); as featured) {
+          <app-featured-project [project]="featured" />
+        }
+        @if (content.others().length) {
+          <h3 class="others-title">{{ i18n.t().projects.others }}</h3>
+          <ul class="grid">
+            @for (p of content.others(); track p.slug) {
+              <li><app-project-card [project]="p" /></li>
             }
-            — {{ p.summary }}
-            @if (p.caseStudy) {
-              <a [routerLink]="caseStudyPath(i18n.lang(), p.caseStudy)">{{
-                i18n.t().projects.caseStudy
-              }}</a>
-            }
-          </li>
+          </ul>
         }
-      </ul>
+      </section>
 
-      <h2>{{ i18n.t().caseStudy.eyebrow }}</h2>
-      <ul data-testid="case-studies">
-        @for (c of content.caseStudies(); track c.slug) {
-          <li>
-            <a [routerLink]="caseStudyPath(i18n.lang(), c.slug)">{{ c.title }}</a>
-          </li>
-        }
-      </ul>
+      <section id="stack" class="section container" aria-labelledby="stack-title">
+        <header class="section-head">
+          <h2 id="stack-title">{{ i18n.t().stack.title }}</h2>
+        </header>
+        <app-stack-section />
+      </section>
 
-      <h2>{{ i18n.t().stack.title }}</h2>
-      <p>
-        {{ i18n.t().stack.production }}:
-        @for (s of stack.production; track s.name) {
-          {{ s.name }}{{ $last ? '' : ', ' }}
-        }
-      </p>
+      <section id="journey" class="section container" aria-labelledby="journey-title">
+        <header class="section-head">
+          <h2 id="journey-title">{{ i18n.t().journey.title }}</h2>
+        </header>
+        <app-journey-section />
+      </section>
 
-      <h2>{{ i18n.t().journey.title }}</h2>
-      <ul>
-        @for (e of timeline; track e.period + e.org) {
-          <li>{{ e.period }} · {{ i18n.pick(e.role) }} · {{ e.org }}</li>
-        }
-      </ul>
-
-      <h2>{{ i18n.t().contact.title }}</h2>
-      <p>
-        <a [href]="'mailto:' + contact.email">{{ contact.email }}</a> ·
-        <a [href]="contact.linkedin">{{ i18n.t().contact.linkedin }}</a>
-      </p>
+      <section id="contact" class="section container" aria-labelledby="contact-title">
+        <header class="section-head">
+          <h2 id="contact-title">{{ i18n.t().contact.title }}</h2>
+        </header>
+        <app-contact-section />
+      </section>
     </main>
+  `,
+  styles: `
+    .others-title {
+      margin-block: var(--space-xl) var(--space-m);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+      gap: var(--space-m);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
   `,
 })
 export class HomeView {
   protected readonly i18n = inject(LangService);
   protected readonly content = inject(ContentService);
-  protected readonly profile = PROFILE;
-  protected readonly contact = CONTACT;
-  protected readonly stack = STACK;
-  protected readonly timeline = TIMELINE;
-  protected readonly caseStudyPath = caseStudyPath;
+
+  constructor() {
+    const seo = inject(SeoService);
+    effect(() => {
+      const lang = this.i18n.lang();
+      seo.update({
+        title: `${PROFILE.name} · ${this.i18n.pick(PROFILE.role)}`,
+        description: this.i18n.t().meta.siteDescription,
+        path: homePath(lang),
+        alternatePath: homePath(this.i18n.other()),
+      });
+    });
+  }
 }

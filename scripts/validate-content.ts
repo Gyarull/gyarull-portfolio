@@ -21,6 +21,7 @@ import {
   caseStudySchema,
   contactSchema,
   profileSchema,
+  siteSchema,
   projectSchema,
   stackSchema,
   timelineSchema,
@@ -34,6 +35,7 @@ type Collection = keyof typeof COLLECTIONS;
 
 const DATA_FILES: Record<string, ZodType> = {
   'profile.json': profileSchema,
+  'site.json': siteSchema,
   'contact.json': contactSchema,
   'stack.json': stackSchema,
   'timeline.json': timelineSchema,

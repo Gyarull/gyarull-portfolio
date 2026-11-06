@@ -100,3 +100,9 @@ export const timelineSchema = z.array(
 );
 export type Timeline = z.output<typeof timelineSchema>;
 export type TimelineEntry = Timeline[number];
+
+export const siteSchema = z.strictObject({
+  /** URL pública del sitio, sin barra final. Se usa en canonical, Open Graph y sitemap. */
+  url: z.url().refine((u) => !u.endsWith('/'), 'Sin barra final'),
+});
+export type Site = z.output<typeof siteSchema>;

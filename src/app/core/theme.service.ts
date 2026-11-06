@@ -28,7 +28,11 @@ export class ThemeService {
   constructor() {
     if (!this.isBrowser) return;
 
-    const media = this.document.defaultView?.matchMedia('(prefers-color-scheme: dark)');
+    const view = this.document.defaultView;
+    const media =
+      typeof view?.matchMedia === 'function'
+        ? view.matchMedia('(prefers-color-scheme: dark)')
+        : null;
     if (media) {
       this.systemDark.set(media.matches);
       media.addEventListener('change', (e) => this.systemDark.set(e.matches));

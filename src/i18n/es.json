@@ -9,7 +9,9 @@
     "stack": "Stack",
     "journey": "Trayectoria",
     "contact": "Contacto",
-    "skipToContent": "Saltar al contenido"
+    "skipToContent": "Saltar al contenido",
+    "menu": "Menú",
+    "closeMenu": "Cerrar menú"
   },
   "theme": {
     "toLight": "Cambiar a tema claro",
@@ -21,17 +23,19 @@
     "switchToLabel": "Ver el sitio en inglés"
   },
   "hero": {
-    "eyebrow": "Hola, soy"
+    "eyebrow": "Hola, soy",
+    "profiles": "Perfiles"
   },
   "projects": {
     "featured": "Proyecto destacado",
     "others": "Otros proyectos",
     "launch": "Probar {title}",
-    "launchHint": "Se abre en una pestaña nueva",
     "repo": "Código",
     "video": "Video",
     "caseStudy": "Leer el caso de estudio",
-    "stack": "Tecnologías"
+    "stack": "Tecnologías",
+    "opensNewTab": "(se abre en una pestaña nueva)",
+    "demo": "Demo"
   },
   "stack": {
     "title": "Stack",
@@ -54,7 +58,9 @@
   "caseStudy": {
     "eyebrow": "Caso de estudio",
     "back": "Volver al inicio",
-    "published": "Publicado el {date}"
+    "published": "Publicado el {date}",
+    "project": "Proyecto",
+    "onThisPage": "En esta página"
   },
   "notFound": {
     "title": "Página no encontrada",
@@ -62,6 +68,7 @@
     "back": "Volver al inicio"
   },
   "footer": {
-    "builtWith": "Hecho con Analog y Claude Code."
+    "builtWith": "Hecho con Analog y Claude Code.",
+    "rights": "© {year} {name}"
   }
 }

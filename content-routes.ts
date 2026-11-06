@@ -9,7 +9,7 @@ import frontMatter from 'front-matter';
 const LANG_PREFIX = { es: '/casos', en: '/en/case-studies' } as const;
 
 export function contentRoutes(root: string): string[] {
-  const routes = ['/', '/en'];
+  const routes = ['/', '/en', '/404'];
   for (const [lang, prefix] of Object.entries(LANG_PREFIX)) {
     const dir = join(root, 'src', 'content', 'case-studies', lang);
     if (!existsSync(dir)) continue;

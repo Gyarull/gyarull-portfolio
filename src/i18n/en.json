@@ -9,7 +9,9 @@
     "stack": "Stack",
     "journey": "Journey",
     "contact": "Contact",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "menu": "Menu",
+    "closeMenu": "Close menu"
   },
   "theme": {
     "toLight": "Switch to light theme",
@@ -21,17 +23,19 @@
     "switchToLabel": "View the site in Spanish"
   },
   "hero": {
-    "eyebrow": "Hi, I'm"
+    "eyebrow": "Hi, I'm",
+    "profiles": "Profiles"
   },
   "projects": {
     "featured": "Featured project",
     "others": "Other projects",
     "launch": "Try {title}",
-    "launchHint": "Opens in a new tab",
     "repo": "Code",
     "video": "Video",
     "caseStudy": "Read the case study",
-    "stack": "Technologies"
+    "stack": "Technologies",
+    "opensNewTab": "(opens in a new tab)",
+    "demo": "Demo"
   },
   "stack": {
     "title": "Stack",
@@ -54,7 +58,9 @@
   "caseStudy": {
     "eyebrow": "Case study",
     "back": "Back to home",
-    "published": "Published on {date}"
+    "published": "Published on {date}",
+    "project": "Project",
+    "onThisPage": "On this page"
   },
   "notFound": {
     "title": "Page not found",
@@ -62,6 +68,7 @@
     "back": "Back to home"
   },
   "footer": {
-    "builtWith": "Built with Analog and Claude Code."
+    "builtWith": "Built with Analog and Claude Code.",
+    "rights": "© {year} {name}"
   }
 }

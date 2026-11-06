@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
@@ -8,6 +9,9 @@ import type { DeprecationOrId } from 'sass';
 import { contentRoutes } from './content-routes.ts';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
+const site = JSON.parse(readFileSync(new URL('./src/data/site.json', import.meta.url), 'utf8')) as {
+  url: string;
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
@@ -46,8 +50,9 @@ export default defineConfig(() => ({
         },
       },
       prerender: {
-        // Home en cada idioma + un caso de estudio por cada .md publicado.
+        // Home en cada idioma + un caso de estudio por cada .md publicado + 404.
         routes: () => Promise.resolve(contentRoutes(root)),
+        sitemap: { host: site.url },
       },
     }),
   ],
