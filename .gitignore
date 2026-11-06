@@ -49,3 +49,6 @@ Thumbs.db
 # Vitest output
 .vitest/
 /docs/lighthouse/reports
+
+# Wrangler
+.wrangler

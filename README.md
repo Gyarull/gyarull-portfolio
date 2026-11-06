@@ -1,6 +1,6 @@
 # Portfolio — Guillermo Yarull
 
-Sitio personal estático hecho con [Analog](https://analogjs.org) (Angular), desplegado en Cloudflare Pages.
+Sitio personal estático hecho con [Analog](https://analogjs.org) (Angular), desplegado en Cloudflare Workers como sitio estático.
 
 ```bash
 npm install

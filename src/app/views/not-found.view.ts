@@ -8,7 +8,7 @@ import { homePath } from '../core/i18n/routes';
 import { SeoService } from '../core/seo/seo.service';
 
 /**
- * 404. Se prerenderiza como /404.html, que Cloudflare Pages sirve para cualquier ruta inexistente
+ * 404. Se prerenderiza como /404.html, que Cloudflare sirve para cualquier ruta inexistente
  * (en cualquier idioma), así que muestra el mensaje en ambos idiomas.
  */
 @Component({

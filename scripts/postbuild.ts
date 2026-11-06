@@ -1,6 +1,6 @@
 /**
  * Ajustes al build estático (dist/analog/public), después del prerender:
- * - /404/index.html → /404.html, que Cloudflare Pages sirve con estado 404 para rutas inexistentes.
+ * - /404/index.html → /404.html, que Cloudflare sirve con estado 404 (`not_found_handling` en wrangler.jsonc) para rutas inexistentes.
  * - Quita /404 del sitemap.
  * - Genera robots.txt con la URL del sitio (src/data/site.json).
  * - Precarga en cada página las fuentes del primer pintado (Newsreader y Geist, alfabeto latino),

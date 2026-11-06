@@ -1,0 +1,14 @@
+// Deploy en Cloudflare Workers como sitio 100 % estático (sin código de servidor).
+// Cloudflare ejecuta `npm run build` y después `npx wrangler deploy`, que publica esta carpeta.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gyarull",
+  "compatibility_date": "2026-11-06",
+  "assets": {
+    "directory": "./dist/analog/public",
+    // Rutas inexistentes → /404.html con estado 404.
+    "not_found_handling": "404-page",
+    // /en sirve en/index.html y /en/ redirige a /en, igual que las URLs canónicas del sitio.
+    "html_handling": "drop-trailing-slash",
+  },
+}

@@ -22,7 +22,7 @@ I had used Angular at my previous job (2019–2021), so the framework wasn't new
 
 ## Architecture and decisions
 
-- **Everything is prerendered.** Each page is built as static HTML and published on Cloudflare Pages. Content reads without JavaScript; Angular hydrates afterwards for the interactive parts.
+- **Everything is prerendered.** Each page is built as static HTML and published on Cloudflare as a static site, with no server code. Content reads without JavaScript; Angular hydrates afterwards for the interactive parts.
 - **Validated content.** Projects and case studies are Markdown files with frontmatter; profile, stack and journey are JSON. Before every build, a Zod validator checks:
   - that every field has the right type and there are no extra fields;
   - that every file exists in both languages;

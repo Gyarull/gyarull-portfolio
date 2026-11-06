@@ -22,7 +22,7 @@ Angular lo usé en mi trabajo anterior (2019–2021), así que el framework no e
 
 ## Arquitectura y decisiones
 
-- **Todo se prerenderiza.** Cada página sale como HTML estático en el build y se publica en Cloudflare Pages. El contenido se lee sin JavaScript; Angular hidrata después para lo interactivo.
+- **Todo se prerenderiza.** Cada página sale como HTML estático en el build y se publica en Cloudflare como sitio estático, sin código de servidor. El contenido se lee sin JavaScript; Angular hidrata después para lo interactivo.
 - **Contenido validado.** Proyectos y casos de estudio son archivos Markdown con frontmatter; perfil, stack y trayectoria son JSON. Antes de cada build, un validador con Zod revisa:
   - que cada campo tenga el tipo correcto y que no haya campos de más;
   - que cada archivo exista en los dos idiomas;

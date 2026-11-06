@@ -1,6 +1,6 @@
 # Portfolio de Guillermo Yarull
 
-Sitio personal estático en Analog (Angular), bilingüe ES/EN, desplegado en Cloudflare Pages.
+Sitio personal estático en Analog (Angular), bilingüe ES/EN, desplegado en Cloudflare Workers como assets estáticos (`wrangler.jsonc`).
 Convenciones del framework: `node_modules/@analogjs/platform/AGENTS.md`.
 
 ## Comandos
