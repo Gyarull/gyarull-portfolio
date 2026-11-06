@@ -46,7 +46,10 @@ export class RevealDirective {
             { duration: 0.7, delay: this.appRevealDelay(), ease: EASE_OUT },
           );
         },
-        { amount: 0.15 },
+        // Se dispara cuando el borde superior pasa el 90 % de la pantalla. No usamos un
+        // porcentaje del elemento: en textos largos podría superar la altura de la pantalla y
+        // el contenido nunca se revelaría.
+        { margin: '0px 0px -10% 0px' },
       );
     });
   }
