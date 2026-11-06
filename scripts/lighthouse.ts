@@ -91,7 +91,7 @@ try {
 
 const summary = `# Lighthouse
 
-Medido con \`npm run lighthouse\` sobre el build estático local (${new Date().toISOString().slice(0, 10)}).
+Medido con \`npm run lighthouse\` sobre ${REMOTE ? `el sitio publicado (${REMOTE})` : 'el build estático local'} (${new Date().toISOString().slice(0, 10)}).
 Orden de puntajes: Performance · Accessibility · Best Practices · SEO.
 
 | Dispositivo | Página | Perf. | A11y | BP | SEO | LCP | TBT | CLS |

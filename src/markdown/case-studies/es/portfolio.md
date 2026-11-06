@@ -65,8 +65,8 @@ Cada fase cerraba igual: build, lint y tests sin warnings, revisión en el naveg
 
 ## Resultado y tiempos
 
-- **Tiempo:** de la primera pregunta al sitio completo, con contenido, animaciones y casos de estudio, unos dos días (5 y 6 de noviembre de 2026). [TODO: completar con el deploy]
-- **Lighthouse:** 100 en Performance, Accessibility, Best Practices y SEO, en mobile y desktop, en la home y en los casos de estudio de los dos idiomas. LCP de 0,8 s en mobile y 0,2 s en desktop, CLS de 0.
+- **Tiempo:** de la primera pregunta al sitio publicado, con contenido, animaciones y casos de estudio, unos dos días (5 y 6 de noviembre de 2026).
+- **Lighthouse, sobre el sitio publicado:** 100 en Performance, Accessibility, Best Practices y SEO en mobile y desktop, en la home y en los casos de estudio de los dos idiomas. La única excepción es un 99 de Performance en mobile en un caso de estudio. LCP de 0,9 s en mobile y de 0,2 a 0,4 s en desktop, CLS de 0.
 - **Peso:** JavaScript inicial de 107 KB comprimidos (casi todo Angular y su router); CSS global de 5 KB; Motion de 7 KB, que se carga después y solo si corresponde animar.
 - **Verificado en el navegador:** con `prefers-reduced-motion`, Motion no se descarga, el ecualizador y el pentagrama quedan quietos y todo el contenido es visible.
 
